@@ -10,6 +10,7 @@ const App = () => {
   const [shows, setShows] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [currentPage, setCurrentPage] = useState('movies');
+  const [selectedShow, setSelectedShow] = useState(null); // För att lagra vald show
 
   // Hämta filmer
   const fetchMovies = async () => {
@@ -44,6 +45,14 @@ const App = () => {
     fetchShows(movieId);
   };
 
+
+  // Hantera bokning av show
+  const handleBookShow = (show) => {
+    setSelectedShow(show); // Sätt vald show
+    setCurrentPage('booking'); // Gå till bokningssidan
+  };
+
+
   // Återgå till filmlistan
   const handleBackToMovies = () => {
     setCurrentPage('movies');
@@ -67,12 +76,15 @@ const App = () => {
 
       {currentPage === 'booking' && (
         <>
-          <h1>Bokningssida</h1>
+ <h1>Bokningssida</h1>
           <button onClick={handleBackToMovies}>Tillbaka till filmer</button>
           {shows.map((show) => (
-            <ShowCard key={show._id} show={show} />
+            <ShowCard 
+            key={show._id} 
+            show={show} 
+            onBook={handleBookShow} /> 
           ))}
-          {shows.length > 0 && <BookingForm show={shows[0]} />} {/* Skicka första showen som exempel */}
+          {selectedShow && <BookingForm show={selectedShow} />} {/* Skicka vald show till bokningsformulär */}
         </>
       )}
     </div>
