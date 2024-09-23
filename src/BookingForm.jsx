@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import './BookingForm.css'
 
-const BookingForm = ({ show }) => {
+const BookingForm = ({ show, bookedSeats }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [sms, setSms] = useState('');
+  const [email, setEmail] = useState('');
   const [selectedSeat, setSelectedSeat] = useState('');
+
+  const handleSeatClick = (seat) => {
+    if (!bookedSeats.includes(seat)) { // Kontrollera om säte är bokat
+      setSelectedSeat(seat);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +19,7 @@ const BookingForm = ({ show }) => {
       showId: show._id,
       name,
       phone,
-      sms,
+      email,
       seat: selectedSeat,
     };
 
@@ -23,20 +30,35 @@ const BookingForm = ({ show }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Boka biljett till {show.movie.title}</h2>
+      <h2>Boka biljett till vald föreställning</h2>
       <p>Starttid: {new Date(show.startTime).toLocaleString()}</p>
       <p>Antal tillgängliga platser: {show.availableSeats.length}</p>
 
-      <label>
-        Välj plats:
-        <select value={selectedSeat} onChange={(e) => setSelectedSeat(e.target.value)}>
-          <option value="">Välj en plats</option>
-          {show.availableSeats.map((seat) => (
-            <option key={seat} value={seat}>{seat}</option>
-          ))}
-        </select>
-      </label>
-      <br />
+
+      <h3>Välj plats:</h3>
+      <div className="seat-selection">
+
+        {show.availableSeats.map((seat) => (
+          <button
+            key={seat}
+            className={`seat ${selectedSeat === seat ? 'selected' : ''}`}
+            onClick={() => handleSeatClick(seat)}
+            type="button"
+          >
+            {seat}
+          </button>
+        ))}
+        {bookedSeats.map((seat) => (
+          <button
+            key={seat}
+            className="seat booked"
+            type="button"
+            disabled
+          >
+            {seat}
+          </button>
+        ))}
+      </div>
 
       <label>
         Namn:
@@ -61,11 +83,11 @@ const BookingForm = ({ show }) => {
       <br />
 
       <label>
-        SMS:
+        Email-adress:
         <input
           type="text"
-          value={sms}
-          onChange={(e) => setSms(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>

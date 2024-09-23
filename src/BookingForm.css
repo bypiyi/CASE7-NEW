@@ -1,0 +1,26 @@
+.seat-selection {
+    margin: 20px 0;
+    background-color: black; /* Bakgrund för seat-selection */
+    display: grid; /* Använd Grid istället för Flexbox */
+    grid-template-columns: repeat(5, 1fr); /* 5 kolumner av lika bredd */
+    gap: 10px; /* Avstånd mellan sätena */
+}
+
+.seat {
+    padding: 10px 15px;
+    background-color: #f1c40f; /* Färg för lediga platser */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center; /* Centrera texten */
+}
+
+.seat.selected {
+    background-color: #76c7c0; /* Färg för valda platser */
+}
+
+.seat.booked {
+    background-color: #fc0e0e; /* Färg för otillgängliga platser */
+    cursor: not-allowed; /* Ändra muspekaren */
+    opacity: 0.6; /* Gör den lite genomskinlig */
+}

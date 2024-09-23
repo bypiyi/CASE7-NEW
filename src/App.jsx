@@ -76,17 +76,25 @@ const App = () => {
 
       {currentPage === 'booking' && (
         <>
- <h1>Bokningssida</h1>
-          <button onClick={handleBackToMovies}>Tillbaka till filmer</button>
-          {shows.map((show) => (
-            <ShowCard 
-            key={show._id} 
-            show={show} 
-            onBook={handleBookShow} /> 
-          ))}
-          {selectedShow && <BookingForm show={selectedShow} />} {/* Skicka vald show till bokningsformulär */}
-        </>
-      )}
+  <h1>Bokningssida</h1>
+    <button onClick={handleBackToMovies}>Tillbaka till filmer</button>
+    {shows.map((show) => {
+      const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title; // Hämta filmens titel
+      return (
+        <ShowCard 
+          key={show._id} 
+          show={show} 
+          movieTitle={movieTitle} // Skicka filmens titel som prop
+          onBook={() => handleBookShow(show)} // Använd din befintliga funktion för bokning
+        />
+      );
+    })}
+    {selectedShow && <BookingForm 
+    show={selectedShow}
+    bookedSeats={selectedShow.bookedSeats} 
+    />} {/* Skicka vald show till bokningsformulär */}
+  </>
+)}
     </div>
   );
 };
