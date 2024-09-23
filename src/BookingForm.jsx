@@ -37,7 +37,6 @@ const BookingForm = ({ show, bookedSeats }) => {
 
       <h3>Välj plats:</h3>
       <div className="seat-selection">
-
         {show.availableSeats.map((seat) => (
           <button
             key={seat}

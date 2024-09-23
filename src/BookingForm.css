@@ -1,9 +1,11 @@
 .seat-selection {
     margin: 20px 0;
-    background-color: black; /* Bakgrund för seat-selection */
-    display: grid; /* Använd Grid istället för Flexbox */
-    grid-template-columns: repeat(5, 1fr); /* 5 kolumner av lika bredd */
-    gap: 10px; /* Avstånd mellan sätena */
+    background-color: black; 
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px;
+    justify-content: center; /* Centrerar rutnätet horisontellt */
+    align-items: center; /* Centrerar rutnätet vertikalt */
 }
 
 .seat {

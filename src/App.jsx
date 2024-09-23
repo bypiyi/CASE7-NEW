@@ -64,6 +64,7 @@ const App = () => {
       {currentPage === 'movies' && (
         <>
           <h1>Filmer</h1>
+          <div className ="movie-card-container">
           {movies.map((movie) => (
             <MovieCard
               key={movie._id}
@@ -71,6 +72,7 @@ const App = () => {
               onShowAvailable={handleShowAvailable} // Lägg till knapp för att se shower
             />
           ))}
+          </div>
         </>
       )}
 
