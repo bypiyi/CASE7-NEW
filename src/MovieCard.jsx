@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './MovieCard.css'; // Glöm inte att importera CSS-filen
 
 const MovieCard = ({ movie, onShowAvailable }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div className="movie-card">
-            {/* Visar Movie Poster */}
+        <div 
+            className="movie-card" 
+            onMouseEnter={() => setIsHovered(true)} 
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <img
                 src={movie.posterUrl}
                 alt={movie.title}
-                style={{
-                    width: '300px',
-                    height: '350px',
-                    borderRadius: '15px',
-                }}
+                className="movie-poster"
             />
-            <h3>{movie.title}</h3>
-            <p className="movie-description">{movie.description}</p>
-            <p className="movie-genre"><b>Genre:</b> {movie.genre}</p>
-            <p className="movie-director"><b>Director:</b> {movie.director}</p>
-            <p className="movie-duration"><b>Duration:</b> {movie.duration}</p>
-
-            <button onClick={() => onShowAvailable(movie._id)}>See Available Shows</button>
+            {isHovered && (
+                <div className="movie-info">
+                    <h3>{movie.title}</h3>
+                    <p className="movie-description">{movie.description}</p>
+                    <p className="movie-genre"><b>Genre:</b> {movie.genre}</p>
+                    <p className="movie-director"><b>Director:</b> {movie.director}</p>
+                    <p className="movie-duration"><b>Duration:</b> {movie.duration}</p>
+                    <button onClick={() => onShowAvailable(movie._id)}>See Available Shows</button>
+                </div>
+            )}
         </div>
     );
 };

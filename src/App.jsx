@@ -26,11 +26,11 @@ const App = () => {
   // Hämta shower för vald film
   const fetchShows = async (movieId) => {
     try {
-      const response = await fetch(`https://cinema-api.henrybergstrom.com/api/v1/shows/movie/${movieId}`); // Använd rätt endpoint
+      const response = await fetch(`https://cinema-api.henrybergstrom.com/api/v1/shows/movie/${movieId}`);
       const data = await response.json();
-      console.log('Fetched shows:', data); // Kontrollera API-svaret
-      setShows(data); // Sätt shower i tillståndet
-      setCurrentPage('shows'); // Visa shower
+      console.log('Fetched shows:', data);
+      setShows(data);
+      setCurrentPage('shows');
     } catch (error) {
       console.error('Error fetching shows:', error);
     }
@@ -43,13 +43,13 @@ const App = () => {
   // Hantera visning av tillgängliga shower
   const handleShowAvailable = (movieId) => {
     setSelectedMovieId(movieId);
-    fetchShows(movieId); // Hämta shower för den specifika filmen
+    fetchShows(movieId);
   };
 
   // Hantera bokning av show
   const handleBookShow = (show) => {
-    setSelectedShow(show); // Sätt vald show
-    setCurrentPage('booking'); // Gå till bokningsformulär
+    setSelectedShow(show);
+    setCurrentPage('booking');
   };
 
   // Återgå till filmlistan
@@ -75,7 +75,7 @@ const App = () => {
               <MovieCard
                 key={movie._id}
                 movie={movie}
-                onShowAvailable={handleShowAvailable} // Lägg till knapp för att se shower
+                onShowAvailable={handleShowAvailable}
               />
             ))}
           </div>
@@ -90,13 +90,13 @@ const App = () => {
           </div>
           <div className="show-card-container">
             {shows.map((show) => {
-              const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title; // Hämta filmens titel
+              const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title;
               return (
                 <ShowCard
                   key={show._id}
                   show={show}
-                  movieTitle={movieTitle} // Skicka filmens titel som prop
-                  onBook={() => handleBookShow(show)} // Använd din befintliga funktion för bokning
+                  movieTitle={movieTitle}
+                  onBook={() => handleBookShow(show)}
                 />
               );
             })}

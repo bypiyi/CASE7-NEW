@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './BookingForm.css';
 
-const BookingForm = ({ show, bookedSeats }) => {
+const BookingForm = ({ show, bookedSeats, onBackToShows }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [selectedSeat, setSelectedSeat] = useState('');
-  const [confirmationMessage, setConfirmationMessage] = useState(''); // För bekräftelse
-  const [totalPrice, setTotalPrice] = useState(0); // För totalpriset
+  const [confirmationMessage, setConfirmationMessage] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleSeatClick = (seat) => {
     if (!bookedSeats.includes(seat)) {
@@ -20,13 +20,12 @@ const BookingForm = ({ show, bookedSeats }) => {
 
     const bookingDetails = {
       email: email,
-      show: show._id, // Skicka föreställningens ID
-      seats: [selectedSeat], // Skicka valt säte som en array
-      bookingTime: new Date().toISOString(), // Aktuell tid
-      totalPrice: 0, // Låt API:n räkna ut priset
+      show: show._id,
+      seats: [selectedSeat],
+      bookingTime: new Date().toISOString(),
+      totalPrice: 0,
     };
 
-    // Skicka POST-förfrågan till API:et
     fetch('https://cinema-api.henrybergstrom.com/api/v1/bookings', {
       method: 'POST',
       headers: {
@@ -37,10 +36,8 @@ const BookingForm = ({ show, bookedSeats }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Spara totalpris från API-svaret och visa bekräftelse
         setTotalPrice(data.totalPrice);
-        const bookingTimeFormatted = new Date().toLocaleString(); // Formatera bokningstid för användarvisning
-
+        const bookingTimeFormatted = new Date().toLocaleString();
         setConfirmationMessage(`Bokning bekräftad!
         - Plats: ${selectedSeat}
         - Totalpris: ${data.totalPrice} SEK
@@ -57,68 +54,75 @@ const BookingForm = ({ show, bookedSeats }) => {
   };
 
   return (
-    <div className="booking-form-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Boka biljett till vald föreställning</h2>
-        <p>Starttid: {new Date(show.startTime).toLocaleString()}</p>
-        <p>Antal tillgängliga platser: {show.availableSeats.length}</p>
+    <div className="booking-page">
 
-        <h3>Välj plats:</h3>
-        <div className="seat-selection">
-          {show.availableSeats.map((seat) => (
-            <button
-              key={seat}
-              className={`seat ${selectedSeat === seat ? 'selected' : ''}`}
-              onClick={() => handleSeatClick(seat)}
-              type="button"
-            >
-              {seat}
-            </button>
-          ))}
-          {bookedSeats.map((seat) => (
-            <button key={seat} className="seat booked" type="button" disabled>
-              {seat}
-            </button>
-          ))}
+      <div className="booking-container">
+        <div className="booking-info">
+          <h2>CHOOSE A SEAT</h2>
+          <p>Movie: {show.title}</p>
+          <p>Date: {new Date(show.startTime).toLocaleString()}</p>
+          <p>Available seats: {show.availableSeats.length}</p>
+
+          <h3>Choose a seat:</h3>
+          <div className="seat-selection">
+            {show.availableSeats.map((seat) => (
+              <button
+                key={seat}
+                className={`seat ${selectedSeat === seat ? 'selected' : ''}`}
+                onClick={() => handleSeatClick(seat)}
+                type="button"
+              >
+                {seat}
+              </button>
+            ))}
+            {bookedSeats.map((seat) => (
+              <button key={seat} className="seat booked" type="button" disabled>
+                {seat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <label>
-          Namn:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <br />
+        <div className="booking-form-container">
+          <form onSubmit={handleSubmit}>
+            <h2>BOOK YOUR TICKET</h2>
 
-        <label>
-          Telefon:
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-        </label>
-        <br />
+            <label>
+              Name:
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
 
-        <label>
-          Email-adress:
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <br />
+            <label>
+              Telephone:
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </label>
 
-        <button type="submit">Boka biljett</button>
+            <label>
+              Email:
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
 
-        {confirmationMessage && <p>{confirmationMessage}</p>}
-      </form>
+            <button type="submit">BOOK TICKET</button>
+
+            {confirmationMessage && <p>{confirmationMessage}</p>}
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
