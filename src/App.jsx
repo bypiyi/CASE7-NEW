@@ -5,13 +5,12 @@ import BookingForm from './BookingForm';
 import './App.css';
 import logo from '/logo.png';
 
-
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [shows, setShows] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [currentPage, setCurrentPage] = useState('movies');
-  const [selectedShow, setSelectedShow] = useState(null); // För att lagra vald show
+  const [selectedShow, setSelectedShow] = useState(null);
 
   // Hämta filmer
   const fetchMovies = async () => {
@@ -27,10 +26,11 @@ const App = () => {
   // Hämta shower för vald film
   const fetchShows = async (movieId) => {
     try {
-      const response = await fetch(`https://cinema-api.henrybergstrom.com/api/v1/shows?movieId=${movieId}`);
+      const response = await fetch(`https://cinema-api.henrybergstrom.com/api/v1/shows/movie/${movieId}`); // Använd rätt endpoint
       const data = await response.json();
-      setShows(data);
-      setCurrentPage('booking');
+      console.log('Fetched shows:', data); // Kontrollera API-svaret
+      setShows(data); // Sätt shower i tillståndet
+      setCurrentPage('shows'); // Visa shower
     } catch (error) {
       console.error('Error fetching shows:', error);
     }
@@ -43,16 +43,14 @@ const App = () => {
   // Hantera visning av tillgängliga shower
   const handleShowAvailable = (movieId) => {
     setSelectedMovieId(movieId);
-    fetchShows(movieId);
+    fetchShows(movieId); // Hämta shower för den specifika filmen
   };
-
 
   // Hantera bokning av show
   const handleBookShow = (show) => {
     setSelectedShow(show); // Sätt vald show
-    setCurrentPage('booking'); // Gå till bokningssidan
+    setCurrentPage('booking'); // Gå till bokningsformulär
   };
-
 
   // Återgå till filmlistan
   const handleBackToMovies = () => {
@@ -60,15 +58,18 @@ const App = () => {
     setSelectedMovieId(null);
   };
 
+  // Återgå till shower
+  const handleBackToShows = () => {
+    setCurrentPage('shows');
+  };
+
   return (
     <div>
       {currentPage === 'movies' && (
         <>
-
-<div className="logo-container">
-          <img src={logo} alt="Logo" className="logo" />
+          <div className="logo-container">
+            <img src={logo} alt="Logo" className="logo" />
           </div>
-
           <div className="movie-card-container">
             {movies.map((movie) => (
               <MovieCard
@@ -81,14 +82,12 @@ const App = () => {
         </>
       )}
 
-      {currentPage === 'booking' && (
+      {currentPage === 'shows' && (
         <>
-
           <div className="shows-container">
             <h1>AVAILABLE SHOWS</h1>
             <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
           </div>
-
           <div className="show-card-container">
             {shows.map((show) => {
               const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title; // Hämta filmens titel
@@ -102,11 +101,18 @@ const App = () => {
               );
             })}
           </div>
+        </>
+      )}
 
-          {selectedShow && <BookingForm
-            show={selectedShow}
-            bookedSeats={selectedShow.bookedSeats}
-          />} {/* Skicka vald show till bokningsformulär */}
+      {currentPage === 'booking' && selectedShow && (
+        <>
+          <div className="booking-container">
+            <BookingForm
+              show={selectedShow}
+              bookedSeats={selectedShow.bookedSeats}
+            />
+            <button className="back-to-shows-btn" onClick={handleBackToShows}>BACK TO SHOWS</button>
+          </div>
         </>
       )}
     </div>
