@@ -57,67 +57,69 @@ const BookingForm = ({ show, bookedSeats }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Boka biljett till vald föreställning</h2>
-      <p>Starttid: {new Date(show.startTime).toLocaleString()}</p>
-      <p>Antal tillgängliga platser: {show.availableSeats.length}</p>
+    <div className="booking-form-container">
+      <form onSubmit={handleSubmit}>
+        <h2>Boka biljett till vald föreställning</h2>
+        <p>Starttid: {new Date(show.startTime).toLocaleString()}</p>
+        <p>Antal tillgängliga platser: {show.availableSeats.length}</p>
 
-      <h3>Välj plats:</h3>
-      <div className="seat-selection">
-        {show.availableSeats.map((seat) => (
-          <button
-            key={seat}
-            className={`seat ${selectedSeat === seat ? 'selected' : ''}`}
-            onClick={() => handleSeatClick(seat)}
-            type="button"
-          >
-            {seat}
-          </button>
-        ))}
-        {bookedSeats.map((seat) => (
-          <button key={seat} className="seat booked" type="button" disabled>
-            {seat}
-          </button>
-        ))}
-      </div>
+        <h3>Välj plats:</h3>
+        <div className="seat-selection">
+          {show.availableSeats.map((seat) => (
+            <button
+              key={seat}
+              className={`seat ${selectedSeat === seat ? 'selected' : ''}`}
+              onClick={() => handleSeatClick(seat)}
+              type="button"
+            >
+              {seat}
+            </button>
+          ))}
+          {bookedSeats.map((seat) => (
+            <button key={seat} className="seat booked" type="button" disabled>
+              {seat}
+            </button>
+          ))}
+        </div>
 
-      <label>
-        Namn:
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
-      <br />
+        <label>
+          Namn:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <br />
 
-      <label>
-        Telefon:
-        <input
-          type="tel"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
-      </label>
-      <br />
+        <label>
+          Telefon:
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        </label>
+        <br />
 
-      <label>
-        Email-adress:
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <br />
+        <label>
+          Email-adress:
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        <br />
 
-      <button type="submit">Boka biljett</button>
+        <button type="submit">Boka biljett</button>
 
-      {confirmationMessage && <p>{confirmationMessage}</p>}
-    </form>
+        {confirmationMessage && <p>{confirmationMessage}</p>}
+      </form>
+    </div>
   );
 };
 

@@ -1,3 +1,10 @@
+.booking-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full höjd på viewporten för centrering */
+}
+
 .seat-selection {
     margin: 20px 0;
     background-color: black; 
@@ -6,6 +13,8 @@
     gap: 10px;
     justify-content: center; /* Centrerar rutnätet horisontellt */
     align-items: center; /* Centrerar rutnätet vertikalt */
+    padding: 10px; /* Lägger till padding för en bättre layout */
+    border-radius: 5px; /* Runda hörn för hela sätesvalet */
 }
 
 .seat {
@@ -25,4 +34,47 @@
     background-color: #fc0e0e; /* Färg för otillgängliga platser */
     cursor: not-allowed; /* Ändra muspekaren */
     opacity: 0.6; /* Gör den lite genomskinlig */
+}
+
+form {
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1), 
+                0px 20px 30px rgba(0, 0, 0, 0.07), 
+                0px 30px 40px rgba(0, 0, 0, 0.05);
+    width: 320px; /* Justera bredden på formuläret */
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
 }

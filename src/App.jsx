@@ -3,6 +3,7 @@ import MovieCard from './MovieCard';
 import ShowCard from './ShowCard';
 import BookingForm from './BookingForm';
 import './App.css';
+import logo from '/logo.png';
 
 
 const App = () => {
@@ -63,44 +64,51 @@ const App = () => {
     <div>
       {currentPage === 'movies' && (
         <>
-          <h1>BLACK CAT CINEMA</h1>
-          <div className ="movie-card-container">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onShowAvailable={handleShowAvailable} // Lägg till knapp för att se shower
-            />
-          ))}
+
+<div className="logo-container">
+          <img src={logo} alt="Logo" className="logo" />
+          </div>
+
+          <div className="movie-card-container">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onShowAvailable={handleShowAvailable} // Lägg till knapp för att se shower
+              />
+            ))}
           </div>
         </>
       )}
 
       {currentPage === 'booking' && (
         <>
-  <h1>AVAILABLE SHOWS</h1>
-    <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
-    
-    <div className="show-card-container">
-    {shows.map((show) => {
-      const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title; // Hämta filmens titel
-      return (
-        <ShowCard 
-          key={show._id} 
-          show={show} 
-          movieTitle={movieTitle} // Skicka filmens titel som prop
-          onBook={() => handleBookShow(show)} // Använd din befintliga funktion för bokning
-        />
-      );
-    })}
-    </div>
 
-    {selectedShow && <BookingForm 
-    show={selectedShow}
-    bookedSeats={selectedShow.bookedSeats} 
-    />} {/* Skicka vald show till bokningsformulär */}
-  </>
-)}
+          <div className="shows-container">
+            <h1>AVAILABLE SHOWS</h1>
+            <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
+          </div>
+
+          <div className="show-card-container">
+            {shows.map((show) => {
+              const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title; // Hämta filmens titel
+              return (
+                <ShowCard
+                  key={show._id}
+                  show={show}
+                  movieTitle={movieTitle} // Skicka filmens titel som prop
+                  onBook={() => handleBookShow(show)} // Använd din befintliga funktion för bokning
+                />
+              );
+            })}
+          </div>
+
+          {selectedShow && <BookingForm
+            show={selectedShow}
+            bookedSeats={selectedShow.bookedSeats}
+          />} {/* Skicka vald show till bokningsformulär */}
+        </>
+      )}
     </div>
   );
 };
