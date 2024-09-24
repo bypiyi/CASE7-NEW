@@ -39,7 +39,16 @@ const BookingForm = ({ show, bookedSeats }) => {
       .then((data) => {
         // Spara totalpris från API-svaret och visa bekräftelse
         setTotalPrice(data.totalPrice);
-        setConfirmationMessage(`Bokning bekräftad! Totalpris: ${data.totalPrice} SEK. Tack, ${name}!`);
+        const bookingTimeFormatted = new Date().toLocaleString(); // Formatera bokningstid för användarvisning
+
+        setConfirmationMessage(`Bokning bekräftad!
+        - Plats: ${selectedSeat}
+        - Totalpris: ${data.totalPrice} SEK
+        - Datum & tid: ${new Date(show.startTime).toLocaleString()}
+        - E-post: ${email}
+        - Telefonnummer: ${phone}
+        
+        En bekräftelse har skickats till din e-post och telefon.`);
       })
       .catch((error) => {
         console.error('Fel vid bokningen:', error);
