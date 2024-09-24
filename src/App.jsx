@@ -63,7 +63,7 @@ const App = () => {
     <div>
       {currentPage === 'movies' && (
         <>
-          <h1>Filmer</h1>
+          <h1>BLACK CAT CINEMA</h1>
           <div className ="movie-card-container">
           {movies.map((movie) => (
             <MovieCard
@@ -78,8 +78,10 @@ const App = () => {
 
       {currentPage === 'booking' && (
         <>
-  <h1>Bokningssida</h1>
-    <button onClick={handleBackToMovies}>Tillbaka till filmer</button>
+  <h1>AVAILABLE SHOWS</h1>
+    <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
+    
+    <div className="show-card-container">
     {shows.map((show) => {
       const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title; // Hämta filmens titel
       return (
@@ -91,6 +93,8 @@ const App = () => {
         />
       );
     })}
+    </div>
+
     {selectedShow && <BookingForm 
     show={selectedShow}
     bookedSeats={selectedShow.bookedSeats} 

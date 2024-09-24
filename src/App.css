@@ -4,78 +4,158 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background-color: #e0e0e0; /* Ljusgrå bakgrund som ger en mjuk kontrast */
+  background-color: #e0e0e0;
+  /* Ljusgrå bakgrund som ger en mjuk kontrast */
   color: #333;
 }
 
 /* Mobilanpassning */
 @media (max-width: 768px) {
-  .movie-card, .show-card, .booking-form {
-    width: 90%; /* Gör korten bredare på mindre skärmar */
-    margin: 10px; /* Minska marginalen */
+
+  .movie-card,
+  .show-card,
+  .booking-form {
+    width: 90%;
+    /* Gör korten bredare på mindre skärmar */
+    margin: 10px;
+    /* Minska marginalen */
   }
-  
+
   button {
-    width: 100%; /* Gör knapparna bredare på små skärmar */
+    width: 100%;
+    /* Gör knapparna bredare på små skärmar */
   }
 }
 
 
 
-/* H1, H2 styling */
-h1, h2 {
-  text-align: center;
+/* ----- TYPSNITT ------------ */
+h1 {
+  text-align: left;
+  font-size: 2.5rem;
   color: #333;
+  letter-spacing: 2px;
+  margin: 0px;
+  padding: 10px;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
 h3 {
   font-weight: 600;
-  font-size: 28px;
+  font-size: 18px;
   text-transform: uppercase;
-  letter-spacing: 2px; 
+  letter-spacing: 2px;
+  padding-left: 10px;
 
 }
 
-.movie-description,
+.movie-description {
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 1.8px;
+  ;
+  margin: 8px 0;
+  color: #555;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
 .movie-genre,
 .movie-director,
 .movie-duration {
-  font-size: 16px; 
-  line-height: 1.5; 
-  letter-spacing: 1.8px;;
-  margin: 6px 0; 
-  color: #555; 
-  padding: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 1.8px;
+  ;
+  margin: 8px 0;
+  color: #555;
+  padding-left: 10px;
+}
+/* ------------- */
+
+
+
+/* ---------- MOVIECARD --------- */
+.movie-card-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  max-width: 1200px;
+  padding: 20px;
 }
 
 
-/* Wrapper för hela applikationen */
-div {
+.movie-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  
+  background-color: #f1f1f1;
+  border-radius: 20px;
   padding: 20px;
-}
-
-/* MovieCard styling med skeuomorfisk stil */
-.movie-card, .show-card {
-  background-color: #f1f1f1; /* Ljus, nästan vit bakgrund för kortet */
-  border-radius: 20px; /* Mjuka kanter för ett mer naturligt utseende */
-  padding: 20px;
-  margin: 20px;
-  width: 400px;
-  box-shadow: 
-    0px 10px 15px rgba(0, 0, 0, 0.1), /* Lättaste skuggan */
-    0px 20px 30px rgba(0, 0, 0, 0.07), /* Djupare och bredare */
-    0px 30px 40px rgba(0, 0, 0, 0.05); /* Ännu djupare för realism */
+  margin: 10px;
+  width: 305px;
+  box-shadow:
+    0px 10px 15px rgba(0, 0, 0, 0.1),
+    0px 20px 30px rgba(0, 0, 0, 0.07),
+    0px 30px 40px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
+
+
+/* ---- SHOWCARD ----- */
+.show-card-container {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.show-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  height: 150px;
+  padding: 20px;
+  margin: 10px;
+  width: 305px;
+  box-shadow:
+    0px 10px 15px rgba(0, 0, 0, 0.1),
+    0px 20px 30px rgba(0, 0, 0, 0.07),
+    0px 30px 40px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Hover-effekt */
+.show-card:hover {
+  transform: translateY(-3px);
+  /* Lyft upp kortet vid hover */
+  box-shadow:
+    0px 15px 20px rgba(0, 0, 0, 0.1),
+    0px 25px 35px rgba(0, 0, 0, 0.08),
+    0px 35px 45px rgba(0, 0, 0, 0.07);
+}
+
+/* ---------------------------- */
+
+
+
+
 /* För hover-effekten, vi ökar skuggan något för att få kortet att se upphöjt */
-.movie-card:hover, .show-card:hover {
+.movie-card:hover,
+.show-card:hover {
   transform: translateY(-5px);
-  box-shadow: 
+  box-shadow:
     0px 15px 20px rgba(0, 0, 0, 0.1),
     0px 25px 35px rgba(0, 0, 0, 0.08),
     0px 35px 45px rgba(0, 0, 0, 0.07);
@@ -88,35 +168,57 @@ div {
   padding: 20px;
   margin: 20px;
   width: 300px;
-  box-shadow: 
+  box-shadow:
     0px 10px 15px rgba(0, 0, 0, 0.1),
     0px 20px 30px rgba(0, 0, 0, 0.07),
     0px 30px 40px rgba(0, 0, 0, 0.05);
 }
 
-/* Styling för knappar */
+
+/* -------- KNAPPAR ---------- */
 button {
-  margin-top: 15px;
+  margin-top: 0px;
+  /* Låt knappen tryckas till botten av kortet */
   margin-bottom: 15px;
   background-color: #ffffff;
   color: #333;
-  letter-spacing: 2px;
-  padding: 5px;
-  padding: 10px 20px;
+  letter-spacing: 1px;
+  /* Justera textavstånd */
+  font-size: 11px !important;
+  height: 45px;
+  /* Sätt en fast höjd */
+  padding: 0 10px;
+  /* Sätt padding för att justera bredden */
   border: none;
   border-radius: 10px;
-  box-shadow: 
+  box-shadow:
     0px 8px 10px rgba(0, 0, 0, 0.1),
-    0px 15px 25px rgba(0, 0, 0, 0.08), 
-    0px 20px 30px rgba(0, 0, 0, 0.05); 
+    0px 15px 25px rgba(0, 0, 0, 0.08),
+    0px 20px 30px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  /* Gör knappen så bred som MovieCard */
 }
 
 button:hover {
-  transform: translateY(-3px); /* Lyft knappen något vid hover */
-  box-shadow: 
+  transform: translateY(-3px);
+  box-shadow:
     0px 10px 15px rgba(0, 0, 0, 0.12),
     0px 20px 30px rgba(0, 0, 0, 0.1),
     0px 30px 40px rgba(0, 0, 0, 0.08);
 }
+
+
+.back-to-movies-btn {
+  background-color: #1f111118;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* .back-to-movies-btn:hover {
+  background-color: #ff9999;
+} */

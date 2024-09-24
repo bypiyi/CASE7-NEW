@@ -7,9 +7,9 @@ const ShowCard = ({ show, onSelect, movieTitle, onBook }) => {
   return (
     <div className="show-card" onClick={onSelect}>
 
-<h2>{movieTitle}</h2>
+{/* <h2>{movieTitle}</h2> */}
       <p>{`Starttid: ${startTime}`}</p>
-      <p>{`${show.availableSeats.length} platser tillgängliga`}</p>
+      <p><b>{`${show.availableSeats.length} platser tillgängliga`}</b></p>
 
       {/* För att komma till bokningssidan */}
       <button onClick={() => onBook(show)}>Boka biljett till denna show</button>

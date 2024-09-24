@@ -1,31 +1,50 @@
 import React, { useState } from 'react';
-import './BookingForm.css'
+import './BookingForm.css';
 
 const BookingForm = ({ show, bookedSeats }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [selectedSeat, setSelectedSeat] = useState('');
+  const [confirmationMessage, setConfirmationMessage] = useState(''); // För bekräftelse
+  const [totalPrice, setTotalPrice] = useState(0); // För totalpriset
 
   const handleSeatClick = (seat) => {
-    if (!bookedSeats.includes(seat)) { // Kontrollera om säte är bokat
+    if (!bookedSeats.includes(seat)) {
       setSelectedSeat(seat);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const bookingDetails = {
-      showId: show._id,
-      name,
-      phone,
-      email,
-      seat: selectedSeat,
+      email: email,
+      show: show._id, // Skicka föreställningens ID
+      seats: [selectedSeat], // Skicka valt säte som en array
+      bookingTime: new Date().toISOString(), // Aktuell tid
+      totalPrice: 0, // Låt API:n räkna ut priset
     };
 
-    // Skicka bokningsdata till API:et här
-    console.log('Bokningsdetaljer:', bookingDetails);
-    // Lägg till fetch-kod för att skicka bokningen
+    // Skicka POST-förfrågan till API:et
+    fetch('https://cinema-api.henrybergstrom.com/api/v1/bookings', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bookingDetails),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Spara totalpris från API-svaret och visa bekräftelse
+        setTotalPrice(data.totalPrice);
+        setConfirmationMessage(`Bokning bekräftad! Totalpris: ${data.totalPrice} SEK. Tack, ${name}!`);
+      })
+      .catch((error) => {
+        console.error('Fel vid bokningen:', error);
+        setConfirmationMessage('Ett fel uppstod vid bokningen. Försök igen.');
+      });
   };
 
   return (
@@ -33,7 +52,6 @@ const BookingForm = ({ show, bookedSeats }) => {
       <h2>Boka biljett till vald föreställning</h2>
       <p>Starttid: {new Date(show.startTime).toLocaleString()}</p>
       <p>Antal tillgängliga platser: {show.availableSeats.length}</p>
-
 
       <h3>Välj plats:</h3>
       <div className="seat-selection">
@@ -48,12 +66,7 @@ const BookingForm = ({ show, bookedSeats }) => {
           </button>
         ))}
         {bookedSeats.map((seat) => (
-          <button
-            key={seat}
-            className="seat booked"
-            type="button"
-            disabled
-          >
+          <button key={seat} className="seat booked" type="button" disabled>
             {seat}
           </button>
         ))}
@@ -93,6 +106,8 @@ const BookingForm = ({ show, bookedSeats }) => {
       <br />
 
       <button type="submit">Boka biljett</button>
+
+      {confirmationMessage && <p>{confirmationMessage}</p>}
     </form>
   );
 };
