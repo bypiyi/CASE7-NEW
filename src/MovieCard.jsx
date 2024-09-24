@@ -19,10 +19,7 @@ const MovieCard = ({ movie, onShowAvailable }) => {
             <p className="movie-director"><b>Director:</b> {movie.director}</p>
             <p className="movie-duration"><b>Duration:</b> {movie.duration}</p>
 
-
-
-
-            <button onClick={() => onShowAvailable(movie._id)}>SEE AVAILABLE SHOWS</button>
+            <button onClick={() => onShowAvailable(movie._id)}>See Available Shows</button>
         </div>
     );
 };
