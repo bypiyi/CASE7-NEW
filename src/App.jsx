@@ -86,6 +86,7 @@ const App = () => {
         <>
 
           <div className="show-card-container">
+
           <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
 
             {shows.map((show) => {

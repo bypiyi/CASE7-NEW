@@ -8,7 +8,7 @@ const ShowCard = ({ show, onSelect, movieTitle, onBook }) => {
     <div className="show-card" onClick={onSelect}>
 
 {/* <h2>{movieTitle}</h2> */}
-      {/* <h3>DATE</h3> */}
+      <h3>DATE</h3>
       <p><b>{`${startTime}`}</b></p>
       <p><b>{`${show.availableSeats.length} available seats`}</b></p>
 
