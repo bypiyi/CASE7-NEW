@@ -84,11 +84,10 @@ const App = () => {
 
       {currentPage === 'shows' && (
         <>
-          <div className="shows-container">
-            <h1>AVAILABLE SHOWS</h1>
-            <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
-          </div>
+
           <div className="show-card-container">
+          <button className="back-to-movies-btn" onClick={handleBackToMovies}>BACK TO MOVIES</button>
+
             {shows.map((show) => {
               const movieTitle = movies.find(movie => movie._id === selectedMovieId)?.title;
               return (

@@ -18,15 +18,16 @@ div {
   flex-direction: column;   
   align-items: center;      
   justify-content: center;  
-  height: 100vh;            
+  /* height: 100vh;             */
   text-align: center;       
 }
 
 .logo {
-  max-width: 80%; /* Justera max-bredden för att passa utrymmet */
-  height: auto; /* Bevara bildens proportioner */
-  margin: 0; /* Ta bort eventuell marginal */
-  margin-top: -100px;
+  max-width: 60%;
+  height: auto; 
+  margin: 0; 
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* ----- TYPSNITT ------------ */
@@ -54,7 +55,7 @@ h3 {
   line-height: 1.5;
   letter-spacing: 1.8px;
   margin: 8px 0;
-  color: #555;
+  color: #cecece;
   padding-left: 10px;
 }
 
@@ -73,7 +74,7 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f1f1f1;
+  background-color: black;
   border-radius: 20px;
   padding: 20px;
   margin: 10px;
@@ -93,10 +94,9 @@ h3 {
   align-items: center;      
   justify-content: center;  
   text-align: center;
-  gap: 5px;
-  max-width: 1800px;
+  gap: 30px;
   margin: 0 auto;
-  padding: 0px;
+  padding: 20px;
 }
 
 .show-card {
@@ -142,19 +142,26 @@ h3 {
 
 /* -------- KNAPPAR ---------- */
 button {
-  margin-top: 0px;
+  margin-top: 10px;
+  margin-left: 35px;
   margin-bottom: 15px;
   background-color: #ffffff;
   color: #333;
   letter-spacing: 1px;
   font-size: 11px !important;
   height: 45px;
+  width: 220px;
   padding: 0 20px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.back-to-movies-btn {
+ margin: 0px;
+}
+
 
 button:hover {
   background-color: #e3e3e3;
@@ -164,15 +171,15 @@ button:hover {
 @media (max-width: 768px) {
   .movie-card-container, .show-card-container {
     flex-direction: column;
-    align-items: center; /* Centra korten */
+    align-items: center; 
   }
 
   .movie-card, .show-card {
-    width: 70%; /* Gör korten bredare på mindre skärmar */
+    width: 80%; 
     margin-bottom: -10px;
   }
 
   h1 {
-    font-size: 2rem; /* Minska storleken på rubriken för mobil */
+    font-size: 2rem; 
   }
 }

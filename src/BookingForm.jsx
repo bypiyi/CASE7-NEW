@@ -38,12 +38,12 @@ const BookingForm = ({ show, bookedSeats, onBackToShows }) => {
       .then((data) => {
         setTotalPrice(data.totalPrice);
         const bookingTimeFormatted = new Date().toLocaleString();
-        setConfirmationMessage(`Bokning bekräftad!
-        - Plats: ${selectedSeat}
-        - Totalpris: ${data.totalPrice} SEK
-        - Datum & tid: ${new Date(show.startTime).toLocaleString()}
-        - E-post: ${email}
-        - Telefonnummer: ${phone}
+        setConfirmationMessage(`Booking comfirmed!
+        - Seat: ${selectedSeat}
+        - Total price: ${data.totalPrice} SEK
+        - Date and time: ${new Date(show.startTime).toLocaleString()}
+        - Email: ${email}
+        - Telephone: ${phone}
         
         En bekräftelse har skickats till din e-post och telefon.`);
       })
@@ -56,10 +56,8 @@ const BookingForm = ({ show, bookedSeats, onBackToShows }) => {
   return (
     <div className="booking-page">
 
-      <div className="booking-container">
         <div className="booking-info">
           <h2>CHOOSE A SEAT</h2>
-          <p>Movie: {show.title}</p>
           <p>Date: {new Date(show.startTime).toLocaleString()}</p>
           <p>Available seats: {show.availableSeats.length}</p>
 
@@ -123,7 +121,6 @@ const BookingForm = ({ show, bookedSeats, onBackToShows }) => {
           </form>
         </div>
       </div>
-    </div>
   );
 };
 

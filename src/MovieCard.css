@@ -1,20 +1,20 @@
 .movie-card {
     position: relative;
-    width: 300px; /* Justera bredden efter behov */
-    margin: 10px; /* Avstånd mellan korten */
+    width: 300px;
+    margin: 10px; 
     border-radius: 15px;
-    overflow: hidden; /* Döljer överflödigt innehåll */
+    overflow: hidden; 
 }
 
 .movie-poster {
     width: 100%;
     height: auto;
     border-radius: 15px;
-    transition: transform 0.3s; /* Lägger till en övergångseffekt */
+    transition: transform 0.3s; 
 }
 
 .movie-card:hover .movie-poster {
-    transform: scale(1.05); /* Zoomar in bilden vid hovring */
+    transform: scale(1.05); 
 }
 
 .movie-info {
@@ -22,13 +22,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Halvtransparent bakgrund */
-    color: white; /* Textfärg */
-    padding: 15px; /* Padding för informationen */
-    opacity: 0; /* Döljer informationen som standard */
-    transition: opacity 0.3s; /* Lägger till en övergångseffekt */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .movie-card:hover .movie-info {
-    opacity: 1; /* Gör informationen synlig vid hovring */
+    opacity: 1; 
 }
